@@ -40,6 +40,7 @@ router.get('/', function (req, res) {
   res.render('index', { title: 'Hindustaan Jobs' });
 });
 
+
 /// Reset Password
 router.route('/reset-password')
   .get((req, res) => {
@@ -48,11 +49,11 @@ router.route('/reset-password')
   })
   .post((req, res) => {
     const email = req.body.email;
+    const userType = req.body.userType;
 
     const token = jwt.sign({
-      _id: user._id,
-      email: user.email,
-      userType: user.userType
+      email: email,
+      userType: userType
     }, privateKEY, {
       issuer: issuer, audience: audience,
       algorithm: 'RS256', expiresIn: '24h'
